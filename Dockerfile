@@ -7,4 +7,4 @@ RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
 
-ENTRYPOINT [ "sh", "/scripts/run_config.sh"]
+ENTRYPOINT [ "sh", "run_config.sh"]
