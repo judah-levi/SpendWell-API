@@ -1,1 +1,3 @@
 /venv/
+/scripts/run_config.sh
+/scripts/heroku_cont_deploy.sh
