@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from models.product import Product
-import os
+from models.reccomendation_engine import ReccomendationEngine
 
-
+rec_eng = ReccomendationEngine()
 app = FastAPI()
 
 
@@ -12,7 +12,6 @@ async def root():
 
 @app.post("/barcode")
 async def post_barcode(product: Product):
-    return product
-
-
+    reccomendation_list = rec_eng.get_rec_list(product.upc)
+    return reccomendation_list
 
