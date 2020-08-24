@@ -1,10 +1,7 @@
-FROM python:3.8-slim-buster
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
 
-COPY . /api
-WORKDIR /api
+COPY ./app /app
 
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
-
-ENTRYPOINT [ "sh", "run_config.sh"]
