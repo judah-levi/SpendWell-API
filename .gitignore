@@ -1,3 +1,3 @@
 /venv/
-run_config.sh
-heroku_cont_deploy.sh
+config.sh
+.env
