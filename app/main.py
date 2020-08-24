@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.models.product import Product
+from models.product import Product
 import os
 
 
