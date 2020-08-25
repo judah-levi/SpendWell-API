@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from models.product import Product
 from models.user_signup import UserSignup
 from models.reccomendation_engine import ReccomendationEngine
@@ -9,6 +10,14 @@ import os
 rec_eng = ReccomendationEngine()
 app = FastAPI()
 config = os.environ.get("SECRET_KEY")
+
+app.add_middleware(
+    CORSMiddleware,
+    alllow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*']
+)
 
 
 @app.get("/")
