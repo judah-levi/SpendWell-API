@@ -1,16 +1,14 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
+from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
 from models.product import Product
 from models.user_signup import UserSignup
 from models.reccomendation_engine import ReccomendationEngine
 from db import MongoDB
-import json
-import os
+import json, datetime, jwt, os
 
 rec_eng = ReccomendationEngine()
 app = FastAPI()
-config = os.environ.get("SECRET_KEY")
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -18,7 +16,8 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*']
 )
-
+# SECRET_KEY="helloworld"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 @app.get("/")
 async def root():
@@ -32,14 +31,14 @@ def login():
 def signup(user: UserSignup):
     try:
         if MongoDB.user_lookup(user.email) is not True:
-            new_user = mongoDB.signup(user.username, user.password, user.email)
+            new_user = MongoDB.signup(user.username, user.password, user.email)
             token = jwt.encode({'user': new_user, 'exp': datetime.datetime.utcnow(
-            ) + datetime.timedelta(days=2)}, config, 'HS512')
-            return json.dumps({'token': token.decode('UTF-8')})
+            ) + datetime.timedelta(days=1)}, SECRET_KEY, 'HS512')
+            return jsonable_encoder({'token': token.decode('UTF-8')})
         else:
-            return make_response(json.dumps({"message": "User already Exists"}), 409)
+            return Response(json.dumps({"message": "User already Exists"}), 409)
     except KeyError:
-        return make_response(json.dumps({"message": "missing fields"}), 409)
+        return Response(json.dumps({"message": "missing fields"}), 409)
 
 
 @app.post("/barcode")
