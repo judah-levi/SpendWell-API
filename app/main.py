@@ -1,3 +1,4 @@
+from dotenv import load_dotenv, find_dotenv
 from fastapi import FastAPI, Response, Depends
 from fastapi.encoders import jsonable_encoder
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
@@ -8,6 +9,7 @@ from models.reccomendation_engine import ReccomendationEngine
 from data.mongodb import MongoDB
 import json, datetime, jwt, os, sys
 
+load_dotenv(find_dotenv())
 rec_eng = ReccomendationEngine()
 security = HTTPBasic()
 app = FastAPI()

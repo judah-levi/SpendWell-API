@@ -2,4 +2,4 @@
 config.sh
 .env
 heroku_deploy.sh
-config.sh
+settings.py

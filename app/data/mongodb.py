@@ -1,9 +1,10 @@
 import pymongo
 import os
 from argon2 import PasswordHasher
+from dotenv import load_dotenv, find_dotenv
 
+load_dotenv(find_dotenv())
 client = pymongo.MongoClient(os.getenv("MONGODB_URI"))
-
 db = client["spendwell"]
 users = db["users"]
 ph = PasswordHasher()
