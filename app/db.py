@@ -1,7 +1,6 @@
 import pymongo
 import os
 from argon2 import PasswordHasher
-import pandas as pd
 
 # client = pymongo.MongoClient(os.getenv("MONGODB_URI"))
 
@@ -24,10 +23,10 @@ class MongoDB:
     @staticmethod
     def login(username, password):
         find_user = users.find_one({'user': username})
-        if ph.verify(find_user["password"], password):
-            return {"user_id": str(find_user["_id"]), "authenticated": True}
-        else:
-            return {"authenticated": False}
+        if find_user:
+            if ph.verify(find_user["password"], password):
+                return {"user_id": str(find_user["_id"]), "authenticated": True}
+        return {"authenticated": False}
 
     @staticmethod
     def user_lookup(email):

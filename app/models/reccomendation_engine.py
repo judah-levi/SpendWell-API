@@ -4,6 +4,7 @@ class ReccomendationEngine():
     def get_rec_list(upc):
         rec_list = []
 
-        
-        rec_list.append(upc)
+        julia = model(upc) #returns 3 objs
+
+        rec_list.append(julia)
         return rec_list
