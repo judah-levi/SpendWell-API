@@ -1,6 +1,7 @@
 import pymongo
 import os
 from argon2 import PasswordHasher
+import pandas as pd
 
 client = pymongo.MongoClient(os.getenv("MONGODB_URI"))
 
