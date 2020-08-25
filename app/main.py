@@ -36,7 +36,7 @@ async def login(credentials: HTTPBasicCredentials = Depends(security)):
         try:
             token = jwt.encode({'user': check_user["user_id"], 'exp': datetime.datetime.utcnow(
             ) + datetime.timedelta(days=2)}, SECRET_KEY, algorithm='HS256')
-            return jsonable_encoder({'token': token.decode('UTF-8')})
+            return Response(json.dumps({'token': token}, 200)
         except Exception as e:
             print(e)
     return Response(json.dumps({"message": 'login failed'}), 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
