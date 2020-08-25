@@ -6,7 +6,7 @@ from models.product import Product
 from models.user_signup import UserSignup
 from models.reccomendation_engine import ReccomendationEngine
 from data.mongodb import MongoDB
-import json, datetime, jwt, os
+import json, datetime, jwt, os, sys
 
 rec_eng = ReccomendationEngine()
 security = HTTPBasic()
@@ -32,6 +32,7 @@ async def login(credentials: HTTPBasicCredentials = Depends(security)):
     if check_user["authenticated"]:
         print("secret_key" + os.environ.get('SECRET_KEY'))
         print("userid" + check_user["user_id"])
+        sys.stdout.flush()
         try:
             token = jwt.encode({'user': check_user["user_id"], 'exp': datetime.datetime.utcnow(
             ) + datetime.timedelta(days=2)}, SECRET_KEY, algorithm='HS256')
