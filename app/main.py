@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from models.product import Product
 from models.user_signup import UserSignup
 from models.reccomendation_engine import ReccomendationEngine
-from mongodb import MongoDB
+from data.mongodb import MongoDB
 import json, datetime, jwt, os
 
 rec_eng = ReccomendationEngine()
@@ -18,7 +18,7 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*']
 )
-SECRET_KEY="helloworld"
+SECRET_KEY= os.getenv("MONGDB_URI")
 
 @app.get("/")
 async def root():

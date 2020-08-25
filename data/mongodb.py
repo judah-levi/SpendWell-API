@@ -2,9 +2,9 @@ import pymongo
 import os
 from argon2 import PasswordHasher
 
-# client = pymongo.MongoClient(os.getenv("MONGODB_URI"))
+client = pymongo.MongoClient(os.getenv("MONGODB_URI"))
 
-client = pymongo.MongoClient("mongodb+srv://kol:nNYY3eKtDn8idUJs@cluster0.q6kua.mongodb.net/spendwell?retryWrites=true&w=majority")
+# client = pymongo.MongoClient("mongodb+srv://kol:nNYY3eKtDn8idUJs@cluster0.q6kua.mongodb.net/spendwell?retryWrites=true&w=majority")
 db = client["spendwell"]
 users = db["users"]
 ph = PasswordHasher()
