@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from models.product import Product
 from models.user_signup import UserSignup
 from models.reccomendation_engine import ReccomendationEngine
-from db import MongoDB
+from mongodb import MongoDB
 import json, datetime, jwt, os
 
 rec_eng = ReccomendationEngine()
