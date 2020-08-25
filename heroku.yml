@@ -1,6 +1,8 @@
 build:
     docker:
         web: Dockerfile
-    config: "config.sh"
+    config: 
+        SECRET_KEY: config.sh
+        MONGODB_URI: config.sh
 run:
     web: gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app
