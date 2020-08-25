@@ -32,9 +32,12 @@ async def login(credentials: HTTPBasicCredentials = Depends(security)):
     if check_user["authenticated"]:
         print("secret_key" + os.environ.get('SECRET_KEY'))
         print("userid" + check_user["user_id"])
-        token = jwt.encode({'user': check_user["user_id"], 'exp': datetime.datetime.utcnow(
-        ) + datetime.timedelta(days=2)}, SECRET_KEY, algorithm='HS256')
-        return jsonable_encoder({'token': token.decode('UTF-8')})
+        try:
+            token = jwt.encode({'user': check_user["user_id"], 'exp': datetime.datetime.utcnow(
+            ) + datetime.timedelta(days=2)}, SECRET_KEY, algorithm='HS256')
+            return jsonable_encoder({'token': token.decode('UTF-8')})
+        except Exception as e:
+            print(e)
     return Response(json.dumps({"message": 'login failed'}), 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
 
 @app.post("/signup")
