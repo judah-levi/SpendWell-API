@@ -18,7 +18,7 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*']
 )
-SECRET_KEY= os.getenv("MONGDB_URI")
+SECRET_KEY=os.environ.get("SECRET_KEY")
 
 @app.get("/")
 async def root():
@@ -39,7 +39,8 @@ async def login(credentials: HTTPBasicCredentials = Depends(security)):
             return Response(json.dumps({'token': token}, 200))
         except Exception as e:
             print(e)
-    return Response(json.dumps({"message": 'login failed'}), 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
+    else:
+        return Response(json.dumps({"message": 'login failed'}), 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
 
 @app.post("/signup")
 async def signup(user: UserSignup):
