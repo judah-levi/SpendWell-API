@@ -16,8 +16,7 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*']
 )
-# SECRET_KEY="helloworld"
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY="helloworld"
 
 @app.get("/")
 async def root():
