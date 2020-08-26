@@ -13,16 +13,16 @@ class ReccomendationEngine():
                    'subcategory', 'nutriscore', 'name', 'brand', 'ingredients']
 
         with conn.cursor() as cur:
-            cur.execute('SELECT * FROM products2 WHERE barcode = %s;', [barcode])
+            cur.execute('SELECT * FROM products WHERE barcode = %s;', [barcode])
             prev_result = cur.fetchone()
         prev_prod = {}
         for i, col in enumerate(columns):
             prev_prod[col] = prev_result[i + 1]
 
         with conn.cursor() as cur:
-            cur.execute('SELECT label FROM products2 WHERE barcode = %s;', [barcode])
+            cur.execute('SELECT label FROM products WHERE barcode = %s;', [barcode])
             result = cur.fetchall()
-            cur.execute('SELECT * FROM products2 WHERE label = %s order by nutriscore DESC limit 3;', [result[0][0]])
+            cur.execute('SELECT * FROM products WHERE label = %s order by nutriscore DESC limit 3;', [result[0][0]])
             result = cur.fetchall()
 
         list_of_dicts = []
