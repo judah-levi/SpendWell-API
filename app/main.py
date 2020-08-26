@@ -32,15 +32,9 @@ async def login(credentials: HTTPBasicCredentials = Depends(security)):
     password = credentials.password
     check_user = MongoDB.login(username, password)
     if check_user["authenticated"]:
-        print("secret_key" + os.environ.get('SECRET_KEY'))
-        print("userid" + check_user["user_id"])
-        sys.stdout.flush()
-        try:
-            token = jwt.encode({'user': check_user["user_id"], 'exp': datetime.datetime.utcnow(
-            ) + datetime.timedelta(days=2)}, SECRET_KEY, algorithm='HS256')
-            return Response(json.dumps({'token': token}, 200))
-        except Exception as e:
-            print(e)
+        token = jwt.encode({'user': check_user, 'exp': datetime.datetime.utcnow(
+        ) + datetime.timedelta(days=1)}, SECRET_KEY, algorithm='HS512')
+        return jsonable_encoder({'token': token.decode('UTF-8')})
     else:
         return Response(json.dumps({"message": 'login failed'}), 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
 
