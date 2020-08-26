@@ -4,8 +4,6 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
-# DATABASE_URL = 'postgres://qcsfswwzpmpnoe:c79186b0b2d5cdb40b41ff40d914a4d2c0f8285529274f16fad2384fcb1a9465@ec2-54-247-103-43.eu-west-1.compute.amazonaws.com:5432/d9nkgr3sa7opsa'
-
 
 class ReccomendationEngine():
     @staticmethod
@@ -36,6 +34,3 @@ class ReccomendationEngine():
 
         return list_of_dicts
 
-print(ReccomendationEngine.get_rec_list(1938067)[0])
-print(ReccomendationEngine.get_rec_list(1938067)[1])
-print(ReccomendationEngine.get_rec_list(1938067)[2])
