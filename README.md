@@ -1,6 +1,11 @@
 # SpendWell-API
 
-SpendWell was my team's submission to a local sustainability-oriented hackathon. I wrote the API, containerized with Docker, deployed on Heroku including the provisioning and connection of a Heroku-hosted postgres database. 
+SpendWell was my team's submission to a local sustainability-oriented hackathon. I wrote the API, containerized with Docker, deployed on Heroku including the provisioning and connection of a Heroku-hosted postgres database. Under constraints of not being able to source all of the required data in time, the scope of the MVP was limited to making suggestions based off of a composite nutritional score. 
+
+
+Many Thanks to arstrim (https://github.com/arstrim) for contributing the Reccomendation Engine model. 
+
+
 
 
 Deployed at:
@@ -18,9 +23,9 @@ SpendWell gamifies and incentivizes the change of purchasing behavior from produ
 User scans barcode of any product while grocery shopping
 App loads a suggestion page that will present a product that is less environmentally taxing. It will perform this by a clustering algorithm to see which products are similar and then by a linear regression to compute the most environmental product possible. The user manually closes the suggestion page => app presents the main page. 
 Each product is rated by weighted environment tax score: 
-Packaging type
-Carbon footprint (travel distance)
-Product type (i.e. meat > veggies)
+  Packaging type
+  Carbon footprint (travel distance)
+  Product type (i.e. meat > veggies)
 Checkout Button => user scans receipt
 App parses the receipt and gives points based off the total summed environmental tax score of the receipt
 App redirects to the “awards” page where the user sees how many points they earned for this purchase. 
